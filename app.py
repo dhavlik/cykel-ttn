@@ -1,4 +1,5 @@
 import time
+import traceback
 import ttn
 import sys
 import atexit
@@ -49,8 +50,8 @@ def uplink_callback(msg, client):
 			voltgauge.labels(**lbl).set(data.vbat)
 		timegauge.labels(**lbl).set(int(time.time()))
 		packgauge.set(int(time.time()))
-	except e:
-		print(e)
+	except:
+		traceback.print_exc()
 
 def connect_callback(res, client):
 	if not res:
